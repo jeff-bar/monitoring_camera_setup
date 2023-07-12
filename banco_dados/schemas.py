@@ -5,15 +5,15 @@ from pydantic import BaseModel
 
 class HeatMapBaseSchema(BaseModel):
 
-    id: str | None = None
-    name: str | None = None
-    type: str | None = None
-    position: str | None = None
-    points:  str | None = None
+    id: str = None
+    name: str  = None
+    type: str  = None
+    position: str  = None
+    points:  str  = None
     active: bool = False
-    id_camera:  str | None = None
-    createdAt: datetime | None = None
-    updatedAt: datetime | None = None
+    id_camera:  str = None
+    createdAt: datetime = None
+    updatedAt: datetime = None
 
     class Config:
         orm_mode = True
@@ -29,16 +29,16 @@ class ListHeatMapResponse(BaseModel):
 
 class PolygonBaseSchema(BaseModel):
 
-    id: str | None = None
-    name: str | None = None
-    type: str | None = None
-    position: str | None = None
+    id: str = None
+    name: str = None
+    type: str = None
+    position: str = None
     sitting_person: bool = False
-    points:  str | None = None
+    points:  str = None
     active: bool = False
-    id_camera:  str | None = None
-    createdAt: datetime | None = None
-    updatedAt: datetime | None = None
+    id_camera:  str  = None
+    createdAt: datetime = None
+    updatedAt: datetime = None
 
     class Config:
         orm_mode = True
@@ -55,19 +55,19 @@ class ListPolygonResponse(BaseModel):
 
 class LineBaseSchema(BaseModel):
 
-    id: str | None = None
-    name: str | None = None
-    type: str | None = None
-    position: str | None = None
-    camera: str | None = None
+    id: str = None
+    name: str = None
+    type: str = None
+    position: str = None
+    camera: str = None
     sitting_person: bool = False
     larger_area: bool = False
     active: bool = False
-    points:  str | None = None
-    exclusion_points:  str | None = None
-    id_camera:  str | None = None
-    createdAt: datetime | None = None
-    updatedAt: datetime | None = None
+    points:  str = None
+    exclusion_points:  str = None
+    id_camera:  str = None
+    createdAt: datetime = None
+    updatedAt: datetime = None
 
     class Config:
         orm_mode = True
@@ -84,15 +84,15 @@ class ListLineResponse(BaseModel):
 
 class LojaBaseSchema(BaseModel):
 
-    id: str | None = None
-    name: str | None = None
-    state: str | None = None
-    city: str | None = None
-    road: str | None = None
-    zip_code: str | None = None
-    number: str | None = None
-    createdAt: datetime | None = None
-    updatedAt: datetime | None = None
+    id: str = None
+    name: str = None
+    state: str = None
+    city: str = None
+    road: str = None
+    zip_code: str = None
+    number: str = None
+    createdAt: datetime = None
+    updatedAt: datetime = None
 
     class Config:
         orm_mode = True
@@ -110,9 +110,9 @@ class ListLojaResponse(BaseModel):
 
 class CameraBaseSchema(BaseModel):
 
-    id: str | None = None
-    name: str | None = None
-    id_loja: str | None = None
+    id: str = None
+    name: str = None
+    id_loja: str = None
 
     class Config:
         orm_mode = True
