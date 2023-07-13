@@ -1,7 +1,7 @@
 import cv2
 #import numpy as np
 #import torch
-from PIL import Image
+from PIL import Image, PngImagePlugin
 #from loguru import logger
 import io
 #import imghdr
@@ -15,11 +15,11 @@ import io
 #from ultralytics.yolo.utils.ops import scale_image
 #from dataclasses import dataclass
 
-from helper import (
-    load_img,
-    resize_max_size,
-    pil_to_bytes,
-)
+#from helper import (
+#    load_img,
+#    resize_max_size,
+#    pil_to_bytes,
+#)
 
 
 '''
@@ -378,6 +378,23 @@ def start(original_image, gray=True ):
 
     return bytes_io
 
+
+def pil_to_bytes(pil_img, ext: str, quality: int = 95, exif_infos={}) -> bytes:
+    with io.BytesIO() as output:
+        kwargs = {k: v for k, v in exif_infos.items() if v is not None}
+        if ext == "png" and "parameters" in kwargs:
+            pnginfo_data = PngImagePlugin.PngInfo()
+            pnginfo_data.add_text("parameters", kwargs["parameters"])
+            kwargs["pnginfo"] = pnginfo_data
+
+        pil_img.save(
+            output,
+            format=ext,
+            quality=quality,
+            **kwargs,
+        )
+        image_bytes = output.getvalue()
+    return image_bytes
 
 
 if __name__ == '__main__':

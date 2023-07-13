@@ -1,11 +1,11 @@
-import io
+#import io
 #import os
 #import sys
 #from typing import List, Optional
 
 #from urllib.parse import urlparse
-import cv2
-from PIL import Image, ImageOps, PngImagePlugin
+#import cv2
+#from PIL import Image, ImageOps, PngImagePlugin
 #import numpy as np
 #import torch
 #from const import MPS_SUPPORT_MODELS
@@ -136,7 +136,7 @@ def numpy_to_bytes(image_numpy: np.ndarray, ext: str) -> bytes:
     return image_bytes
 
 
-'''
+
 
 def pil_to_bytes(pil_img, ext: str, quality: int = 95, exif_infos={}) -> bytes:
     with io.BytesIO() as output:
@@ -155,7 +155,6 @@ def pil_to_bytes(pil_img, ext: str, quality: int = 95, exif_infos={}) -> bytes:
         image_bytes = output.getvalue()
     return image_bytes
 
-''' 
 def load_img(img_bytes, gray: bool = False, return_exif: bool = False):
     alpha_channel = None
     image = Image.open(io.BytesIO(img_bytes))
