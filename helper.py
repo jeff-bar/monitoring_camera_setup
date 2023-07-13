@@ -1,19 +1,19 @@
 import io
-import os
-import sys
-from typing import List, Optional
+#import os
+#import sys
+#from typing import List, Optional
 
-from urllib.parse import urlparse
+#from urllib.parse import urlparse
 import cv2
 from PIL import Image, ImageOps, PngImagePlugin
-import numpy as np
-import torch
-from const import MPS_SUPPORT_MODELS
-from loguru import logger
-from torch.hub import download_url_to_file, get_dir
-import hashlib
+#import numpy as np
+#import torch
+#from const import MPS_SUPPORT_MODELS
+#from loguru import logger
+#from torch.hub import download_url_to_file, get_dir
+#import hashlib
 
-
+'''
 def md5sum(filename):
     md5 = hashlib.md5()
     with open(filename, "rb") as f:
@@ -93,6 +93,7 @@ def handle_error(model_path, model_md5, e):
     exit(-1)
 
 
+
 def load_jit_model(url_or_path, device, model_md5: str):
     if os.path.exists(url_or_path):
         model_path = url_or_path
@@ -135,6 +136,8 @@ def numpy_to_bytes(image_numpy: np.ndarray, ext: str) -> bytes:
     return image_bytes
 
 
+'''
+
 def pil_to_bytes(pil_img, ext: str, quality: int = 95, exif_infos={}) -> bytes:
     with io.BytesIO() as output:
         kwargs = {k: v for k, v in exif_infos.items() if v is not None}
@@ -152,7 +155,7 @@ def pil_to_bytes(pil_img, ext: str, quality: int = 95, exif_infos={}) -> bytes:
         image_bytes = output.getvalue()
     return image_bytes
 
-
+''' 
 def load_img(img_bytes, gray: bool = False, return_exif: bool = False):
     alpha_channel = None
     image = Image.open(io.BytesIO(img_bytes))
@@ -290,3 +293,5 @@ def only_keep_largest_contour(mask: np.ndarray) -> List[np.ndarray]:
         return cv2.drawContours(new_mask, contours, max_index, 255, -1)
     else:
         return mask
+
+'''
