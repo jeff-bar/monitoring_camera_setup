@@ -341,13 +341,15 @@ class CaptureImage():
 
 def start(original_image, gray=True ):
 
+    '''
     capture_image = CaptureImage()
 
     image, mask = capture_image.process( original_image  )
 
-
-    ''' 
     res_np_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
+    '''
+    res_np_img = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY) 
+    
     bytes_io = io.BytesIO(
             pil_to_bytes(
                 Image.fromarray(res_np_img),
@@ -357,9 +359,9 @@ def start(original_image, gray=True ):
         )
 
     return bytes_io
-    '''
 
-    
+
+    '''
     is_success_img, buffer_image = cv2.imencode(".png", image)
     is_success_mask, buffer_mask = cv2.imencode(".png", mask)
 
@@ -371,7 +373,7 @@ def start(original_image, gray=True ):
     else:
         raise("Não é possível ler a imagem")
 
-    
+    '''   
 
 
 if __name__ == '__main__':
