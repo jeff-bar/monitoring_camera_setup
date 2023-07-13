@@ -11,7 +11,7 @@ piexif==1.1.3
 safetensors
 omegaconf
 controlnet-aux==0.0.3
-ultralytics
+#ultralytics
 fastapi
 uvicorn
 

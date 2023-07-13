@@ -5,17 +5,24 @@ from PIL import Image
 from loguru import logger
 import io
 import imghdr
-from model_manager import ModelManager
-from model.utils import torch_gc
+#from model_manager import ModelManager
+#from model.utils import torch_gc
 from schema import Config
 import multiprocessing
 import os
 import random
-from ultralytics import YOLO
-from ultralytics.yolo.utils.ops import scale_image
+#from ultralytics import YOLO
+#from ultralytics.yolo.utils.ops import scale_image
 from dataclasses import dataclass
 
+from helper import (
+    load_img,
+    resize_max_size,
+    pil_to_bytes,
+)
 
+
+'''
 os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
 
 
@@ -27,11 +34,6 @@ CONF=0.20
 DEVIDE = 0 if torch.cuda.is_available() else "cpu"
 
 
-from helper import (
-    load_img,
-    resize_max_size,
-    pil_to_bytes,
-)
 
 
 NUM_THREADS = str(multiprocessing.cpu_count())
@@ -341,27 +343,13 @@ class CaptureImage():
 
 def start(original_image, gray=True ):
 
-    '''
+
     capture_image = CaptureImage()
 
     image, mask = capture_image.process( original_image  )
 
     res_np_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
-    '''
-    res_np_img = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY) 
-    
-    bytes_io = io.BytesIO(
-            pil_to_bytes(
-                Image.fromarray(res_np_img),
-                "png",
-                quality=95
-            )
-        )
 
-    return bytes_io
-
-
-    '''
     is_success_img, buffer_image = cv2.imencode(".png", image)
     is_success_mask, buffer_mask = cv2.imencode(".png", mask)
 
@@ -373,7 +361,23 @@ def start(original_image, gray=True ):
     else:
         raise("Não é possível ler a imagem")
 
-    '''   
+
+
+ '''
+def start(original_image, gray=True ):
+    
+    img = cv2.imread("./banco_dados/db/foi.jpeg", cv2.COLOR_BGR2GRAY)
+    
+    bytes_io = io.BytesIO(
+            pil_to_bytes(
+                Image.fromarray(img),
+                "png",
+                quality=95
+            )
+        )
+
+    return bytes_io
+
 
 
 if __name__ == '__main__':
