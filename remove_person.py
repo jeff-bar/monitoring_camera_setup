@@ -1,7 +1,8 @@
-import cv2
+#import cv2
 #import numpy as np
 #import torch
 from PIL import Image, PngImagePlugin
+from numpy import asarray
 #from loguru import logger
 import io
 #import imghdr
@@ -366,11 +367,11 @@ def start(original_image, gray=True ):
  '''
 def start(original_image, gray=True ):
     
-    img = cv2.imread("./banco_dados/db/foi.jpeg", cv2.COLOR_BGR2GRAY)
+    img = Image.open("./banco_dados/db/foi.jpeg")
     
     bytes_io = io.BytesIO(
             pil_to_bytes(
-                Image.fromarray(img),
+                Image.fromarray(asarray(img)),
                 "png",
                 quality=95
             )
