@@ -3,11 +3,48 @@
 from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException, status, Response, APIRouter
 from banco_dados.database import get_db
-from banco_dados.models import Polygon
+from banco_dados.models import Polygon, Camera, Loja
 from banco_dados.schemas import PolygonBaseSchema
 
 
 router = APIRouter()
+
+
+
+@router.patch('/api/polygon/active/{polygonId}/{active}')
+def update_line(polygonId: str, active: bool, db: Session = Depends(get_db)):
+    polygon_query = db.query(Polygon).filter(Polygon.id == polygonId)
+    db_line = polygon_query.first()
+
+    if not db_line:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f'No polygon with this id: {polygonId} found')
+    
+    polygon_query.filter(Polygon.id == polygonId).update({Polygon.active: active },
+                                                       synchronize_session=False)
+    db.commit()
+    db.refresh(db_line)
+    return {"status": "success", "polygon": db_line}
+
+
+
+
+@router.get('/api/polygon/process')
+def all_line(db: Session = Depends(get_db)):
+
+    polygon_process = db.query(
+                            Polygon, Loja, Camera
+                        ).join(
+                            Camera, Polygon.id_camera == Camera.id
+                        ).join(
+                            Loja, Camera.id_loja == Loja.id 
+                        ).filter(  
+                            Polygon.active == True 
+                        ).all()
+
+    return {'status': 'success', 'results': len(polygon_process), 'polygon': polygon_process}
+
+
 
 
 @router.get('/api/polygon/')

@@ -59,7 +59,6 @@ class LineBaseSchema(BaseModel):
     name: str = None
     type: str = None
     position: str = None
-    camera: str = None
     sitting_person: bool = False
     larger_area: bool = False
     active: bool = False

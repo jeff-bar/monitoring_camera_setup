@@ -42,8 +42,6 @@ def all_line(db: Session = Depends(get_db)):
                             HeatMap.active == True 
                         ).all()
 
-
-
     return {'status': 'success', 'results': len(heat_maps_process), 'heat_maps': heat_maps_process}
 
 
