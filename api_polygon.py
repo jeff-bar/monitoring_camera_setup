@@ -42,7 +42,7 @@ def all_line(db: Session = Depends(get_db)):
                             Polygon.active == True 
                         ).all()
 
-    return {'status': 'success', 'results': len(polygon_process), 'polygon': polygon_process}
+    return {'status': 'success', 'results': len(polygon_process), 'polygons': polygon_process}
 
 
 
