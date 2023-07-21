@@ -44,6 +44,7 @@ class Polygon(Base):
 
     sitting_person = Column(Boolean, nullable=False, default=False)
     points = Column(String, nullable=False)
+    name_points = Column(String, nullable=False)
     createdAt = Column(TIMESTAMP(timezone=True),
                        nullable=False, server_default=func.now())
     updatedAt = Column(TIMESTAMP(timezone=True),
@@ -66,7 +67,7 @@ class Line(Base):
     )
 
     sitting_person = Column(Boolean, nullable=False, default=False)
-    larger_area = Column(Boolean, nullable=False, default=True)
+    space_enterece = Column(String, nullable=False)
     points = Column(String, nullable=False)
     exclusion_points = Column(String, nullable=False)
     createdAt = Column(TIMESTAMP(timezone=True),

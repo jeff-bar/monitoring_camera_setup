@@ -58,6 +58,10 @@ def all_line(db: Session = Depends(get_db), limit: int = 10, page: int = 1, sear
 @router.post('/api/save_line', status_code=status.HTTP_201_CREATED)
 def save_line(payload:LineBaseSchema , db: Session = Depends(get_db)):
 
+    if payload.space_enterece is not None and payload.space_enterece != "BIG" and payload.space_enterece != "SMALL":
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail=f'Space_enterece field must be "BIG", "SMALL" or NULL')
+
     new_line = Line(**payload.dict())
     db.add(new_line)
     db.commit()
@@ -69,6 +73,11 @@ def save_line(payload:LineBaseSchema , db: Session = Depends(get_db)):
 
 @router.patch('/api/line/{lineId}')
 def update_line(lineId: str, payload: LineBaseSchema, db: Session = Depends(get_db)):
+
+    if payload.space_enterece is not None and payload.space_enterece != "BIG" and payload.space_enterece != "SMALL":
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail=f'Space_enterece field must be "BIG", "SMALL" or NULL')
+
     line_query = db.query(Line).filter(Line.id == lineId)
     db_line = line_query.first()
 

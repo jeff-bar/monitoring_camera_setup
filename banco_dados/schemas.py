@@ -34,7 +34,8 @@ class PolygonBaseSchema(BaseModel):
     type: str = None
     position: str = None
     sitting_person: bool = False
-    points:  str = None
+    points: str = None
+    name_points: str = None 
     active: bool = False
     id_camera:  str  = None
     createdAt: datetime = None
@@ -60,7 +61,7 @@ class LineBaseSchema(BaseModel):
     type: str = None
     position: str = None
     sitting_person: bool = False
-    larger_area: bool = False
+    space_enterece: str = None
     active: bool = False
     points:  str = None
     exclusion_points:  str = None
